@@ -1,14 +1,13 @@
-const numberOfComics = 2697
-const ul = document.querySelector('#searchResults ul')
+async function getNumberOfComics() {
+    try {
+        const numberOfComics = await fetch('https://xkcd.com/info.0.json').then(res => res.json()).then(data => data["num"])
+        return numberOfComics
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
-// const getObj = {
-//     method: "GET",
-//     headers: {
-//         'Content-Type':'application/json',
-//         'Access-Control-Allow-Origin':'*',
-//         'Access-Control-Allow-Methods':['GET', 'POST', 'PUT', 'OPTIONS']
-//     }
-// }
+const ul = document.querySelector('#searchResults ul')
 
 const inputForm = document.querySelector('form');
   
@@ -20,7 +19,11 @@ inputForm.addEventListener('submit', (event) => {
     filterComics(`${input.value}`)
 });
 
-function filterComics(keyword) {
+async function filterComics(keyword) {
+
+    const numberOfComics = await getNumberOfComics()
+    console.log(numberOfComics)
+
     const searchResults = document.querySelector("#searchResults h4")
     searchResults.innerText = `Search Results for "${keyword}"`
     for (let i = 1; i <= numberOfComics; i++) {
