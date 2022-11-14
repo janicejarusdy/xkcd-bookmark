@@ -1,0 +1,14 @@
+img {
+    border-radius: 8px;
+    box-shadow: 0 10px 10px 0;
+}
+
+li {
+    list-style-type: none;
+    margin: 100px auto;
+}
+
+ul, h2 {
+    display: block;
+    margin: auto;
+}
