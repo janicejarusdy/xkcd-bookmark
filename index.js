@@ -8,7 +8,6 @@ async function getNumberOfComics() {
 }
 
 const ul = document.querySelector('#searchResults ul')
-
 const inputForm = document.querySelector('form');
   
 inputForm.addEventListener('submit', (event) => {
@@ -22,10 +21,16 @@ inputForm.addEventListener('submit', (event) => {
 async function filterComics(keyword) {
 
     const numberOfComics = await getNumberOfComics()
-    console.log(numberOfComics)
 
     const searchResults = document.querySelector("#searchResults h4")
     searchResults.innerText = `Search Results for "${keyword}"`
+
+    findMatchingComics(numberOfComics, keyword)
+
+}
+
+function findMatchingComics(numberOfComics, keyword) {
+
     for (let i = 1; i <= numberOfComics; i++) {
         fetch(`https://xkcd.com/${i}/info.0.json`)
         .then(res => res.json())
@@ -37,9 +42,12 @@ async function filterComics(keyword) {
             if (transcriptHasKeyword || titleHasKeyword) {
               ul.innerHTML += `
               <li>
-                <div id= ${i}>
+                <div class= "comic" id= ${i}>
                   <h2>${data["safe_title"]}</h2>
                   <img src="${data["img"]}" alt="${data["alt"]}/>"
+                </div>
+                <div class= "btn">
+                    <button>Save to Bookmarks</button>
                 </div>
               </li>
               `
@@ -47,4 +55,5 @@ async function filterComics(keyword) {
         })
         .catch(error => console.log(`error at id ${i}`))
     }
+
 }

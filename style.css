@@ -1,14 +1,43 @@
-img {
+h4 {
+    font-size: 2rem;
+}
+
+div.comic {
+    background-color: #FFFFE0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 3rem;
     border-radius: 8px;
     box-shadow: 0 10px 10px 0;
 }
 
 li {
     list-style-type: none;
-    margin: 100px auto;
 }
 
 ul, h2 {
-    display: block;
-    margin: auto;
+    align-items: center;
 }
+
+#searchResults, .comic {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comic h2 {
+    margin: 2rem 0 2rem 0;
+}
+
+.btn {
+    border: none;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 2px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+  }
+  
+.btn:hover {background: #eee;}
