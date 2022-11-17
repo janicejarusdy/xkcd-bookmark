@@ -3,6 +3,12 @@ $(window).on('load', function(){
     $(".content").fadeIn(1000)
 })
 
+const searchToolLink = document.querySelector("#searchTool-link")
+const faveComicsLink = document.querySelector("#faveComics-link")
+
+//add event listeners for the above two links, making display none for each other
+
+
 async function getNumberOfComics() {
     try {
         const numberOfComics = await fetch('https://xkcd.com/info.0.json').then(res => res.json()).then(data => data["num"])
@@ -67,7 +73,7 @@ function findMatchingComics(comicArray, keyword) {
                     <img src="${comic["img"]}" alt="${comic["alt"]}/>"
                 </div>
                 <div class="save-btn">
-                  <button data-title="${title}" data-img="${comic["img"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
+                  <button data-title="${title}" data-img="${comic["img"]}" data-alt="${comic["alt"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
                 </div>
             </li>
             `
@@ -124,7 +130,7 @@ function toggleFaveComic(event) {
 //   }
 
 
-function addFaveComic(dataset) {
+function addFaveComic(dataset) { //test this feature
     const initObj = {
         method: "POST",
         headers: {
@@ -133,35 +139,35 @@ function addFaveComic(dataset) {
         },
         body: JSON.stringify({
             "title": dataset["title"],
-            "img": dataset["img"]
+            "img": dataset["img"],
+            "alt": dataset["alt"]
         })
     }
 
     fetch('http://localhost:3000/faveComics', initObj)
         .then(res => res.json())
-        .then(data => console.log(data))
-        // .then(data => {
-        //     event.target.dataset['id'] = data.id
+        .then(data => {
+            dataset['id'] = data.id
+        
+            const ulBookmarks = document.querySelector("#faveComics ul")
 
-        //     if (elem.tagName !== "DIV") {
-        //         elem.parentNode.dataset['id'] = data.id
-        //         elem.parentNode.classList.toggle("saved")
-        //         elem.parentNode.childNodes.forEach(c => {
-        //             console.log(c)
-        //             if (c.nodeName !== "#text") c.dataset['id'] = data.id
-        //         })
-        //     } else {
-        //         elem.dataset['id'] = data.id
-        //         elem.classList.toggle("saved")
-        //         elem.childNodes.forEach(c => {
-        //             console.log(c)
-        //             if (c.nodeName !== "#text") c.dataset['id'] = data.id
-        //         })
-        //     }
-        // })
+            ulBookmarks.innerHTML += `
+            <li id= ${dataset["id"]}>
+                <div class = "container">
+                    <div class= "comic" >
+                    <h2>${dataset["title"]}</h2>
+                    <img src="${dataset["img"]}" alt="${dataset["alt"]}/>"
+                </div>
+                <div class="save-btn">
+                  <button data-title="${title}" data-img="${comic["img"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
+                </div>
+            </li>
+            `
+        })
 }
 
-
+// the below function should have a functionality to delete li item
+// on FaveComics page based on their "id" number aka db.json id number
 // function deleteFavePokemon(elem) {
 //     const initObj = {
 //         method: "DELETE",
