@@ -1,3 +1,8 @@
+$(window).on('load', function(){
+    $(".loader").fadeOut(1000)
+    $(".content").fadeIn(1000)
+})
+
 async function getNumberOfComics() {
     try {
         const numberOfComics = await fetch('https://xkcd.com/info.0.json').then(res => res.json()).then(data => data["num"])
@@ -38,12 +43,12 @@ inputForm.addEventListener('submit', (event) => {
 
 
 
-function filterComics(keyword) {
+async function filterComics(keyword) {
 
     const searchResults = document.querySelector("#searchResults h4")
     searchResults.innerText = `Search Results for "${keyword}"`
 
-    Promise.allSettled(promises).then(findMatchingComics(allComics, keyword))
+    await Promise.allSettled([promises]).then(findMatchingComics(allComics, keyword))
 }
 
 function findMatchingComics(comicArray, keyword) {
@@ -73,6 +78,18 @@ function findMatchingComics(comicArray, keyword) {
     console.log(allComics.length)
             
 }
+
+
+// const postObj = {
+//     method: "POST",
+//     headers: {
+//         "Content-Type": "application/json",
+//         "Accepts": "application/json"
+//     },
+//     body:JSON.stringify({
+//         //fill in with something
+//     })
+// }
 
 function toggleFaveComic(event) {
     // console.log("Has Data-ID? ", event.target.dataset.id)
