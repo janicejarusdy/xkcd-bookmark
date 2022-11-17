@@ -1,1 +1,19 @@
-{"faveComics":[]}
+{
+  "faveComics": [
+    {
+      "title": "Snow Tracking",
+      "img": "https://imgs.xkcd.com/comics/snow_tracking.png",
+      "id": 1
+    },
+    {
+      "title": "Craigslist Apartments",
+      "img": "https://imgs.xkcd.com/comics/craigslist_apartments.png",
+      "id": 2
+    },
+    {
+      "title": "United Shapes",
+      "img": "https://imgs.xkcd.com/comics/united_shapes.png",
+      "id": 3
+    }
+  ]
+}

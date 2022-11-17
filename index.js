@@ -39,16 +39,16 @@ inputForm.addEventListener('submit', (event) => {
     ul.innerHTML = ''
 
     filterComics(`${input.value}`)
+
+    input.value = ''
 });
-
-
 
 async function filterComics(keyword) {
 
     const searchResults = document.querySelector("#searchResults h4")
     searchResults.innerText = `Search Results for "${keyword}"`
 
-    await Promise.allSettled([promises]).then(findMatchingComics(allComics, keyword))
+    await Promise.allSettled(promises).then(findMatchingComics(allComics, keyword))
 }
 
 function findMatchingComics(comicArray, keyword) {
@@ -61,12 +61,13 @@ function findMatchingComics(comicArray, keyword) {
         if (transcriptHasKeyword || titleHasKeyword) {
             ul.innerHTML += `
             <li>
-                <div class= "comic container" id= ${comic["num"]}>
-                  <h2>${comic["safe_title"]}</h2>
-                  <img src="${comic["img"]}" alt="${comic["alt"]}/>"
+                <div class = "container">
+                    <div class= "comic" id= ${comic["num"]}>
+                    <h2>${comic["safe_title"]}</h2>
+                    <img src="${comic["img"]}" alt="${comic["alt"]}/>"
                 </div>
-                <div class= "btn">
-                    <button id="saveToBookmarks" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
+                <div class="save-btn">
+                  <button data-title="${title}" data-img="${comic["img"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
                 </div>
             </li>
             `
@@ -93,9 +94,9 @@ function findMatchingComics(comicArray, keyword) {
 
 function toggleFaveComic(event) {
     // console.log("Has Data-ID? ", event.target.dataset.id)
-    console.log("hello")
+    console.log(event.target.dataset)
     if (event.target.dataset['id']) deleteFaveComic(event.target)
-    else addFaveComic(event.target)
+    else addFaveComic(event.target.dataset)
 }
 
 // function likeCallback(e) {
@@ -123,40 +124,42 @@ function toggleFaveComic(event) {
 //   }
 
 
-// function addFavePokemon(elem) {
-//     const initObj = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accepts": "application/json"
-//         },
-//         body: JSON.stringify({
-//             name: event.target.dataset.pokemon
-//         })
-//     }
+function addFaveComic(dataset) {
+    const initObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json"
+        },
+        body: JSON.stringify({
+            "title": dataset["title"],
+            "img": dataset["img"]
+        })
+    }
 
-//     fetch('http://localhost:3000/favePokemons', initObj)
-//         .then(res => res.json())
-//         .then(data => {
-//             elem.dataset['id'] = data.id
+    fetch('http://localhost:3000/faveComics', initObj)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        // .then(data => {
+        //     event.target.dataset['id'] = data.id
 
-//             if (elem.tagName !== "DIV") {
-//                 elem.parentNode.dataset['id'] = data.id
-//                 elem.parentNode.classList.toggle("saved")
-//                 elem.parentNode.childNodes.forEach(c => {
-//                     console.log(c)
-//                     if (c.nodeName !== "#text") c.dataset['id'] = data.id
-//                 })
-//             } else {
-//                 elem.dataset['id'] = data.id
-//                 elem.classList.toggle("saved")
-//                 elem.childNodes.forEach(c => {
-//                     console.log(c)
-//                     if (c.nodeName !== "#text") c.dataset['id'] = data.id
-//                 })
-//             }
-//         })
-// }
+        //     if (elem.tagName !== "DIV") {
+        //         elem.parentNode.dataset['id'] = data.id
+        //         elem.parentNode.classList.toggle("saved")
+        //         elem.parentNode.childNodes.forEach(c => {
+        //             console.log(c)
+        //             if (c.nodeName !== "#text") c.dataset['id'] = data.id
+        //         })
+        //     } else {
+        //         elem.dataset['id'] = data.id
+        //         elem.classList.toggle("saved")
+        //         elem.childNodes.forEach(c => {
+        //             console.log(c)
+        //             if (c.nodeName !== "#text") c.dataset['id'] = data.id
+        //         })
+        //     }
+        // })
+}
 
 
 // function deleteFavePokemon(elem) {
