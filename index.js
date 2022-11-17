@@ -7,11 +7,16 @@ async function getNumberOfComics() {
     }
 }
 
+const promises = []
+
 async function getAllComics(comicArray){
     const numberOfComics = await getNumberOfComics()
     for (let i = 1; i <= numberOfComics; i++) {
         fetch(`https://xkcd.com/${i}/info.0.json`)
-        .then(res => res.json())
+        .then(res => {
+            promises.push(res)
+            return res.json()
+        })
         .then(data => comicArray.push(data))
         .catch(error => console.log(`error at id ${i}`))
     }
@@ -38,20 +43,19 @@ function filterComics(keyword) {
     const searchResults = document.querySelector("#searchResults h4")
     searchResults.innerText = `Search Results for "${keyword}"`
 
-    findMatchingComics(allComics, keyword)
-
+    Promise.allSettled(promises).then(findMatchingComics(allComics, keyword))
 }
 
 function findMatchingComics(comicArray, keyword) {
 
     comicArray.forEach(comic => {
         const transcript = comic["transcript"]
-            const title = comic["safe_title"]
-            const transcriptHasKeyword = transcript && transcript.toLowerCase().includes(keyword.toLowerCase())
-            const titleHasKeyword = title && title.toLowerCase().includes(keyword.toLowerCase())
-            if (transcriptHasKeyword || titleHasKeyword) {
-              ul.innerHTML += `
-              <li>
+        const title = comic["safe_title"]
+        const transcriptHasKeyword = transcript && transcript.toLowerCase().includes(keyword.toLowerCase())
+        const titleHasKeyword = title && title.toLowerCase().includes(keyword.toLowerCase())
+        if (transcriptHasKeyword || titleHasKeyword) {
+            ul.innerHTML += `
+            <li>
                 <div class= "comic container" id= ${comic["num"]}>
                   <h2>${comic["safe_title"]}</h2>
                   <img src="${comic["img"]}" alt="${comic["alt"]}/>"
@@ -59,10 +63,12 @@ function findMatchingComics(comicArray, keyword) {
                 <div class= "btn">
                     <button id="saveToBookmarks" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
                 </div>
-              </li>
-              `
-            }
+            </li>
+            `
+        }
     })
+
+    ul.innerHTML += '<h3> - End of results - </h4>'
 
     console.log(allComics.length)
             

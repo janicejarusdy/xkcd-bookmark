@@ -19,7 +19,7 @@ ul, h2 {
     align-items: center;
 }
 
-#searchResults, .comic {
+#searchResults, .comic, h3 {
     display: flex;
     flex-flow: column wrap;
     justify-content: space-between;
