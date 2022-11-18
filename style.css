@@ -1,7 +1,36 @@
+.loader {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: black;
+    position: absolute;
+}
+
+.loader > div {
+    height:100px;
+    width: 100px;
+    border: 15px solid grey;
+    border-top-color: white;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 50%;
+    animation: spin 1.5s infinite linear;
+}
+
+@keyframes spin {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    padding: 10%;
+
 }
 
 body {
@@ -33,6 +62,10 @@ h4 {
     font-size: 2rem;
 }
 
+.content {
+    padding: 15%;
+}
+
 .links:hover{
     text-decoration: underline;
     color: blue;
@@ -41,10 +74,11 @@ h4 {
 
 }
 
-.search-posts, .container {
+.search-posts, .container, .bookmarks {
     display: block;
-    justify-content: center;
     overflow: auto;
+    margin: auto;
+    text-align: center;
 }
 
 img {
@@ -52,13 +86,8 @@ img {
     width: auto;
 }
 
-#faveComics{
-    display: inline-block;
-}
-
 div.comic {
     background-color: #FFFFE0;
-    width: auto;
     padding: 2rem;
     margin-bottom: 3rem;
     border-radius: 8px;
@@ -79,7 +108,6 @@ ul, h2 {
     justify-content: center;
     align-items: center;
 }
-
 
 button {
     border: none;
@@ -107,31 +135,4 @@ button:hover{
     color: white;
 }
 
-.loader {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background-color: black;
-    position: absolute;
-}
 
-.loader > div {
-    height:100px;
-    width: 100px;
-    border: 15px solid grey;
-    border-top-color: white;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 50%;
-    animation: spin 1.5s infinite linear;
-}
-
-@keyframes spin {
-    100%{
-        transform: rotate(360deg);
-    }
-}

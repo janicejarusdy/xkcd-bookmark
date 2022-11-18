@@ -13,17 +13,17 @@ const showBoth = document.querySelector("div #showBoth-link")
 
 searchToolLink.addEventListener("click", () => {
     faveComics.style.display="none"
-    searchTool.style.display="inline-block"
+    searchTool.style.display="block"
 })
 
 faveComicsLink.addEventListener("click", () => {
     searchTool.style.display="none"
-    faveComics.style.display="inline-block";
+    faveComics.style.display="block";
 })
 
 showBoth.addEventListener("click", () => {
-    searchTool.style.display="inline-block"
-    faveComics.style.display="inline-block";
+    searchTool.style.display="block"
+    faveComics.style.display="block";
 })
 
 async function getNumberOfComics() {
@@ -119,7 +119,7 @@ function toggleFaveComic(event) {
 }
 
 
-function addFaveComic(element) {
+async function addFaveComic(element) {
     const postObj = {
         method: "POST",
         headers: {
@@ -135,10 +135,13 @@ function addFaveComic(element) {
         })
     }
 
-    fetch('http://localhost:3000/faveComics', postObj)
+    await fetch('http://localhost:3000/faveComics', postObj)
         .then(res => res.json())
         .then(data => {
+            element.dataset.id = data.id
 
+            console.log(`element = ${element}`)
+            console.log(`data = ${data}`)
         
             const ulBookmarks = document.querySelector("#faveComics ul")
 

@@ -1,74 +1,39 @@
 {
   "faveComics": [
     {
-      "title": "Backslashes",
-      "img": "https://imgs.xkcd.com/comics/backslashes.png",
-      "alt": "I searched my .bash_history for the line with the highest ratio of special characters to regular alphanumeric characters, and the winner was: cat out.txt | grep -o ",
-      "num": "1638",
+      "title": "Island (sketch)",
+      "img": "https://imgs.xkcd.com/comics/island_color.jpg",
+      "alt": "Hello, island",
+      "num": "3",
       "id": 1
     },
     {
-      "title": "Dangers",
-      "img": "https://imgs.xkcd.com/comics/dangers.png",
-      "alt": "Zero results: 'snake charming' and 'haberdashery'.  (Things like 'car' and 'boating' and such are of course the highest, by a huge margin.)",
-      "num": "369",
+      "title": "Garfield",
+      "img": "https://imgs.xkcd.com/comics/garfield.jpg",
+      "alt": "The use of the 'Garfield' character for the purposes of this parody qualifies as fair use under the Copyright Act of 1976, 17 U.S.C. sec. 107.  See Campbell v. Acuff-Rose Music (92-1292), 510 U.S. 569",
+      "num": "78",
       "id": 2
     },
     {
-      "title": "Content Protection",
-      "img": "https://imgs.xkcd.com/comics/content_protection.png",
-      "alt": "If you think the purveyors of DRM simply want to protect artists, check out chapters 13 and 14 in Free Culture, by Lawrence Lessig.  Their goal is the elimination of all culture they don't control.",
-      "num": "129",
+      "title": "Travelling Salesman Problem",
+      "img": "https://imgs.xkcd.com/comics/travelling_salesman_problem.png",
+      "alt": "What's the complexity class of the best linear programming cutting-plane techniques?  I couldn't find it anywhere.  Man, the Garfield guy doesn't have these problems ...",
+      "num": "399",
       "id": 3
     },
     {
-      "title": "Julia Stiles",
-      "img": "https://imgs.xkcd.com/comics/julia_stiles.jpg",
-      "alt": "I found an old tape of this episode in my family's closet.  Check the news section of the forums to see the clip!",
-      "num": "130",
+      "title": "Substitute",
+      "img": "https://imgs.xkcd.com/comics/substitute.png",
+      "alt": "YOU THINK THIS IS FUNNY?",
+      "num": "135",
       "id": 4
     },
     {
-      "title": "Apple Jacks",
-      "img": "https://imgs.xkcd.com/comics/apple_jacks.jpg",
-      "alt": "There used to be these ads, see . . .",
-      "num": "38",
+      "title": "Jealousy",
+      "img": "https://imgs.xkcd.com/comics/jealousy.png",
+      "alt": "Oh, huh, so you didn't know that story?",
+      "num": "420",
       "id": 5
-    },
-    {
-      "title": "Meat Cereals",
-      "img": "https://imgs.xkcd.com/comics/meat_cereals.jpg",
-      "alt": "Disgusting",
-      "num": "27",
-      "id": 6
-    },
-    {
-      "title": "Digital Rights Management",
-      "img": "https://imgs.xkcd.com/comics/sony_microsoft_mpaa_riaa_apple.jpg",
-      "alt": "If you're interested in the subject, Lawrence Lessig's 'Free Culture' is pretty good",
-      "num": "86",
-      "id": 7
-    },
-    {
-      "title": "In Popular Culture",
-      "img": "https://imgs.xkcd.com/comics/in_popular_culture.png",
-      "alt": "Someday the 'in popular culture' section will have its own article with an 'in popular culture' section.  It will reference this title-text referencing it, and the blogosphere will implode.",
-      "num": "446",
-      "id": 8
-    },
-    {
-      "title": "Troll Slayer",
-      "img": "https://imgs.xkcd.com/comics/troll_slayer.png",
-      "alt": "We have met the enemy and he is us.",
-      "num": "591",
-      "id": 9
-    },
-    {
-      "title": "1337: Part 4",
-      "img": "https://imgs.xkcd.com/comics/1337_part_4.png",
-      "alt": "Mrs. Roberts would have gotten up sooner, of course, but she was busy piping find ~ and find ~nomad into xargs shred, just in case.",
-      "num": "344",
-      "id": 10
     }
   ]
 }
