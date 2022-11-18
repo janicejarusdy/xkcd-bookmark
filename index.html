@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <script src="./index.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>XKCD Bookmark</title>
@@ -15,9 +19,13 @@
     </div>
     <div class="content">
         <div id=" Introduction">
+            <h1> XKCD-Bookmark</h1>
+            <h3> If you have ever wanted to search n' save an <a href="https://xkcd.com/">XKCD</a> comic for a future use, or just a quick giggle, look no further!
+                <br>Just use the tool below to bookmark as many comics as you'd like! </h3>
             <ul>
-                <li id="searchTool-link">Search</li>
-                <li id="faveComics-link">Favourite Comics</li>
+                <li class="links" id="searchTool-link">Search and results</li>
+                <li class="links" id="faveComics-link">Favourite Comics</li>
+                <li class="links" id="showBoth-link">Show both!</li>
             </ul>
         </div>
         <div class="searchTool">

@@ -1,5 +1,50 @@
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    padding: 10%;
+}
+
+body {
+    font-family: "PT Sans", sans-serif;
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 0;
+}
+
+h1 {
+    font-size: 1.7rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+p {
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
 h4 {
     font-size: 2rem;
+}
+
+.links:hover{
+    text-decoration: underline;
+    color: blue;
+    background-color: lightblue;
+    width: 10rem;
+
+}
+
+.search-posts, .container {
+    display: block;
+    justify-content: center;
+    overflow: auto;
 }
 
 img {
@@ -7,20 +52,20 @@ img {
     width: auto;
 }
 
+#faveComics{
+    display: inline-block;
+}
+
 div.comic {
     background-color: #FFFFE0;
+    width: auto;
     padding: 2rem;
     margin-bottom: 3rem;
     border-radius: 8px;
     box-shadow: 0 10px 10px 0;
 }
 
-#searchTool-link:hover, #faveComics-link:hover{
-    color: red;
-    font-style: underline;
-}
-
-#searchResults li {
+#searchResults li, #faveComics li{
     list-style-type: none;
 }
 
@@ -28,28 +73,39 @@ ul, h2 {
     align-items: center;
 }
 
-#searchResults, .comic, h3 {
+#searchResults, .comic, #faveComics{
     display: flex;
     flex-flow: column wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-.comic h2 {
-    margin: 2rem 0 2rem 0;
-}
 
-.save-btn {
-    border: solid 10px black;
+button {
+    border: none;
+    font-family: "PT Sans", sans-serif;;
+    border-radius: 8px;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    padding: 2px;
+    padding: 0.9rem;
     font-size: 16px;
     cursor: pointer;
     display: block;
+}
+
+button.saved-btn {
+    color: white;
+    background-color: green;
   }
-  
-.save-btn:hover {background: #eee;}
+
+button.unsaved-btn {
+    color: black;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
+}
 
 .loader {
     height: 100vh;

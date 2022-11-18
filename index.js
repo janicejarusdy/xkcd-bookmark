@@ -1,13 +1,30 @@
 $(window).on('load', function(){
-    $(".loader").fadeOut(1000)
-    $(".content").fadeIn(1000)
+    $(".loader").fadeOut(2000)
+    $(".content").fadeIn(2000)
 })
 
 const searchToolLink = document.querySelector("#searchTool-link")
 const faveComicsLink = document.querySelector("#faveComics-link")
 
 //add event listeners for the above two links, making display none for each other
+const searchTool = document.querySelector("div .searchTool")
+const faveComics = document.querySelector("div #faveComics")
+const showBoth = document.querySelector("div #showBoth-link")
 
+searchToolLink.addEventListener("click", () => {
+    faveComics.style.display="none"
+    searchTool.style.display="inline-block"
+})
+
+faveComicsLink.addEventListener("click", () => {
+    searchTool.style.display="none"
+    faveComics.style.display="inline-block";
+})
+
+showBoth.addEventListener("click", () => {
+    searchTool.style.display="inline-block"
+    faveComics.style.display="inline-block";
+})
 
 async function getNumberOfComics() {
     try {
@@ -54,7 +71,8 @@ async function filterComics(keyword) {
     const searchResults = document.querySelector("#searchResults h4")
     searchResults.innerText = `Search Results for "${keyword}"`
 
-    await Promise.allSettled(promises).then(findMatchingComics(allComics, keyword))
+    await Promise.allSettled(promises)
+    .then(findMatchingComics(allComics, keyword))
 }
 
 function findMatchingComics(comicArray, keyword) {
@@ -66,155 +84,130 @@ function findMatchingComics(comicArray, keyword) {
         const titleHasKeyword = title && title.toLowerCase().includes(keyword.toLowerCase())
         if (transcriptHasKeyword || titleHasKeyword) {
             ul.innerHTML += `
-            <li>
+            <li class="search-posts">
                 <div class = "container">
                     <div class= "comic" id= ${comic["num"]}>
                     <h2>${comic["safe_title"]}</h2>
                     <img src="${comic["img"]}" alt="${comic["alt"]}/>"
                 </div>
-                <div class="save-btn">
-                  <button data-title="${title}" data-img="${comic["img"]}" data-alt="${comic["alt"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
+                <div class="unsaved-btn searchPosts" data-num="${comic["num"]}">
+                  <button class="unsaved-btn" data-title="${title}" data-num="${comic["num"]}" data-img="${comic["img"]}" data-alt="${comic["alt"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
                 </div>
             </li>
             `
         }
     })
 
-    ul.innerHTML += '<h3> - End of results - </h4>'
+    ul.innerHTML += '<h3 class="search-posts"> - End of results - </h4>'
 
     console.log(allComics.length)
             
 }
 
-
-// const postObj = {
-//     method: "POST",
-//     headers: {
-//         "Content-Type": "application/json",
-//         "Accepts": "application/json"
-//     },
-//     body:JSON.stringify({
-//         //fill in with something
-//     })
-// }
-
 function toggleFaveComic(event) {
-    // console.log("Has Data-ID? ", event.target.dataset.id)
-    console.log(event.target.dataset)
-    if (event.target.dataset['id']) deleteFaveComic(event.target)
-    else addFaveComic(event.target.dataset)
+    console.log(`the id is: ${event.target.dataset.id}`)
+    if (event.target.dataset.id) {
+        console.log(`I'm in toggleFaveComic trying to delete ${event.target}`)
+        deleteFaveComic(event.target)
+    }
+    else {
+        addFaveComic(event.target)
+        console.log(`I'm in toggleFaveComic trying to add ${event.target}`)
+    }
+
+    console.log(`the id is now: ${event.target.dataset.id}`)
 }
 
-// function likeCallback(e) {
-//     const heart = e.target;
-//     mimicServerCall("bogusUrl")
-//       .then(function(){
-//         if ( heart.innerText === EMPTY_HEART) {
-//           heart.innerText = FULL_HEART;
-//           heart.className = "activated-heart";
-//         } else {
-//           heart.innerText = EMPTY_HEART;
-//           heart.className = "";
-//         }
-//       })
-//       .catch(function(error) {
-//         const modal = document.getElementById("modal");
-//         modal.className = "";
-//         modal.innerText = error;
-//         setTimeout(() =>  modal.className = "hidden", 3000);
-//       });
-//   }
-  
-//   for (const glyph of articleHearts) {
-//     glyph.addEventListener("click", likeCallback);
-//   }
 
-
-function addFaveComic(dataset) { //test this feature
-    const initObj = {
+function addFaveComic(element) {
+    const postObj = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accepts": "application/json"
         },
         body: JSON.stringify({
-            "title": dataset["title"],
-            "img": dataset["img"],
-            "alt": dataset["alt"]
+            title: element.dataset.title,
+            img: element.dataset.img,
+            alt: element.dataset.alt,
+            num: element.dataset.num
+            
         })
     }
 
-    fetch('http://localhost:3000/faveComics', initObj)
+    fetch('http://localhost:3000/faveComics', postObj)
         .then(res => res.json())
         .then(data => {
-            dataset['id'] = data.id
+
         
             const ulBookmarks = document.querySelector("#faveComics ul")
 
             ulBookmarks.innerHTML += `
-            <li id= ${dataset["id"]}>
+            <li class="bookmarks" data-num="${element.dataset["num"]}}>
                 <div class = "container">
                     <div class= "comic" >
-                    <h2>${dataset["title"]}</h2>
-                    <img src="${dataset["img"]}" alt="${dataset["alt"]}/>"
+                    <h2>${element.dataset["title"]}</h2>
+                    <img src="${element.dataset["img"]}" alt="${element.dataset["alt"]}/>"
                 </div>
-                <div class="save-btn">
-                  <button data-title="${title}" data-img="${comic["img"]}" onClick="toggleFaveComic(event)">Save to Bookmarks</button>
+                <div class="saved-btn bookmarks" data-id= "${data.id}" data-num="${element.dataset["num"]}">
+                  <button class="saved-btn" onClick="toggleFaveComic(event)">Saved</button>
                 </div>
             </li>
             `
+
+            const saveButton = document.querySelector(`div[data-num="${element.dataset["num"]}"]`)
+            
+            saveButton.innerHTML = `
+            <button class="saved-btn" data-id="${data.id}" onClick="toggleFaveComic(event)">Saved</button>
+            `
+            saveButton.dataset.id = data.id
+            saveButton.classList.remove("unsaved-btn")
+            saveButton.classList.add("saved-btn")
+            saveButton.parentNode.dataset.id = data.id
         })
+
+        const button = document.querySelector('button')
+        button.addEventListener("click", ((event)=>console.log(event.target)))
 }
 
 // the below function should have a functionality to delete li item
 // on FaveComics page based on their "id" number aka db.json id number
-// function deleteFavePokemon(elem) {
-//     const initObj = {
-//         method: "DELETE",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accepts": "application/json"
-//         },
-//     }
+function deleteFaveComic(element) {
+    const resetComicObj = {
+        title: element.dataset.title,
+        img: element.dataset.img,
+        alt: element.dataset.alt,
+        num: element.dataset.num,
+        id: 0
+    }
+    const initObj = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json"
+        },
+        body: JSON.stringify(
+            resetComicObj
+        )
+            
+        
+    }
 
-//     fetch(`http://localhost:3000/favePokemons/${elem.dataset['id']}`, initObj)
-//         .then(res => res.json())
-//         .then(data => {
-//             if (elem.tagName !== "DIV") {
-//                 delete elem.parentNode.dataset['id']
-//                 elem.parentNode.classList.toggle("saved")
-//                 elem.parentNode.childNodes.forEach(c => {
-//                     if (c.nodeName !== "#text") delete c.dataset['id']
-//                 })
-//             } else {
-//                 delete elem.dataset['id']
-//                 elem.classList.toggle("saved")
-//                 elem.childNodes.forEach(c => {
-//                     if (c.nodeName !== "#text") delete c.dataset['id']
-//                 })
-//             }
-//         })
-// }
+    fetch(`'http://localhost:3000/faveComics/${element.dataset.id}`, initObj)
+        .then(res => res.json())
+        .then(data => {
+            delete data
 
-//     fetch('http://localhost:3000/favePokemons', initObj)
-//         .then(res => res.json())
-//         .then(data => {
-//             elem.dataset['id'] = data.id
+            const liSaved = document.querySelector(`li[data-num="${element.dataset["num"]}"}`)
+            liSaved.innerHTML = ''
 
-//             if (elem.tagName !== "DIV") {
-//                 elem.parentNode.dataset['id'] = data.id
-//                 elem.parentNode.classList.toggle("saved")
-//                 elem.parentNode.childNodes.forEach(c => {
-//                     console.log(c)
-//                     if (c.nodeName !== "#text") c.dataset['id'] = data.id
-//                 })
-//             } else {
-//                 elem.dataset['id'] = data.id
-//                 elem.classList.toggle("saved")
-//                 elem.childNodes.forEach(c => {
-//                     console.log(c)
-//                     if (c.nodeName !== "#text") c.dataset['id'] = data.id
-//                 })
-//             }
-//         })
-// }
+            const greenButton = document.querySelector(`div[data-num="${element.dataset["num"]}"]`)
+            
+            greenButton.classList.remove("saved-btn")
+            greenButton.classList.add("unsaved-btn")
+            greenButton.innerHTML = `
+                <button onClick="toggleFaveComic(event)">Save to Bookmarks</button>
+            `
+        })
+
+}
