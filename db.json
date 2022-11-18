@@ -1,39 +1,69 @@
 {
   "faveComics": [
     {
+      "id": 1
+    },
+    {
+      "title": "In Popular Culture",
+      "img": "https://imgs.xkcd.com/comics/in_popular_culture.png",
+      "alt": "Someday the 'in popular culture' section will have its own article with an 'in popular culture' section.  It will reference this title-text referencing it, and the blogosphere will implode.",
+      "num": "446",
+      "id": 2
+    },
+    {
+      "title": "Pi Equals",
+      "img": "https://imgs.xkcd.com/comics/pi.jpg",
+      "alt": "My most famous drawing, and one of the first I did for the site",
+      "num": "10",
+      "id": 3
+    },
+    {
+      "title": "In Popular Culture",
+      "img": "https://imgs.xkcd.com/comics/in_popular_culture.png",
+      "alt": "Someday the 'in popular culture' section will have its own article with an 'in popular culture' section.  It will reference this title-text referencing it, and the blogosphere will implode.",
+      "num": "446",
+      "id": 4
+    },
+    {
+      "title": "Troll Slayer",
+      "img": "https://imgs.xkcd.com/comics/troll_slayer.png",
+      "alt": "We have met the enemy and he is us.",
+      "num": "591",
+      "id": 5
+    },
+    {
+      "title": "Poisson",
+      "img": "https://imgs.xkcd.com/comics/poisson.jpg",
+      "alt": "Poisson distributions have no value over negative numbers",
+      "num": "12",
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
       "title": "Island (sketch)",
       "img": "https://imgs.xkcd.com/comics/island_color.jpg",
       "alt": "Hello, island",
       "num": "3",
-      "id": 1
+      "id": 8
     },
     {
-      "title": "Garfield",
-      "img": "https://imgs.xkcd.com/comics/garfield.jpg",
-      "alt": "The use of the 'Garfield' character for the purposes of this parody qualifies as fair use under the Copyright Act of 1976, 17 U.S.C. sec. 107.  See Campbell v. Acuff-Rose Music (92-1292), 510 U.S. 569",
-      "num": "78",
-      "id": 2
+      "title": "Online Communities",
+      "img": "https://imgs.xkcd.com/comics/online_communities_small.png",
+      "alt": "I'm waiting for the day when, if you tell someone 'I'm from the internet', instead of laughing they just ask 'oh, what part?'",
+      "num": "256",
+      "id": 9
     },
     {
-      "title": "Travelling Salesman Problem",
-      "img": "https://imgs.xkcd.com/comics/travelling_salesman_problem.png",
-      "alt": "What's the complexity class of the best linear programming cutting-plane techniques?  I couldn't find it anywhere.  Man, the Garfield guy doesn't have these problems ...",
-      "num": "399",
-      "id": 3
+      "title": "Nighttime Stories",
+      "img": "https://imgs.xkcd.com/comics/nighttime_stories.jpg",
+      "alt": "Cue angry letters from all seven fans of Xenocide.",
+      "num": "304",
+      "id": 10
     },
     {
-      "title": "Substitute",
-      "img": "https://imgs.xkcd.com/comics/substitute.png",
-      "alt": "YOU THINK THIS IS FUNNY?",
-      "num": "135",
-      "id": 4
-    },
-    {
-      "title": "Jealousy",
-      "img": "https://imgs.xkcd.com/comics/jealousy.png",
-      "alt": "Oh, huh, so you didn't know that story?",
-      "num": "420",
-      "id": 5
+      "id": 11
     }
   ]
 }
