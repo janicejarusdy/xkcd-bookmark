@@ -3,12 +3,8 @@ $(window).on('load', function(){
     $(".content").fadeIn(2000)
 })
 
-const searchToolLink = document.querySelector("#searchTool-link")
-const faveComicsLink = document.querySelector("#faveComics-link")
-
-//add event listeners for the above two links, making display none for each other
-const searchTool = document.querySelector("div .searchTool")
-const faveComics = document.querySelector("div #faveComics")
+const searchTool = document.querySelector("div #searchTool-link")
+const faveComics = document.querySelector("div #faveComics-link")
 const showBoth = document.querySelector("div #showBoth-link")
 
 searchToolLink.addEventListener("click", () => {
